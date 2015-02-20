@@ -1,10 +1,14 @@
 # wren-colors
 
-Print fancy messages to the terminal. Until Wren supports importing you'll have
-to copy `colors.wren` into your source file and create new instances of
-`AnsiPrinter` to get colored logging.
+Print fancy messages to the terminal.
+
+### Usage
+
+This assumes you've included this repository under `/wren-colors` in your project root.
 
 ```dart
+import 'wren-colors/index' for AnsiColors, AnsiPrinter
+
 var a = new AnsiPrinter(AnsiColors.BLUE, AnsiColors.WHITE_B, AnsiColors.BLINK)
 a.print("This text should be blue on a white background and blink.")
 
