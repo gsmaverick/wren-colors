@@ -67,15 +67,15 @@ class AnsiColors {
 }
 
 class AnsiPrinter {
-  new (foreground) {
-    _modifiers = [foreground, null, null]
+  construct new (foreground) {
+    _modifiers = [foreground]
   }
 
-  new (foreground, background) {
-    _modifiers = [foreground, background, null]
+  construct new (foreground, background) {
+    _modifiers = [foreground, background]
   }
 
-  new (foreground, background, style) {
+  construct new (foreground, background, style) {
     _modifiers = [foreground, background, style]
   }
 
@@ -144,18 +144,9 @@ class AnsiPrinter {
   }
 
   printList_(objects) {
-    var setModifiers = _modifiers.where {|mod|
-      return mod
-    }
-
-    var modifierCodes = setModifiers.map {|mod|
-      return mod[2..(mod.count - 2)]
-    }
-
     // Set the styling for the forthcoming terminal output.
-    IO.writeString_("\u001b[" + modifierCodes.join(";") + "m")
-
-    IO.printList_(objects)
+    IO.write(_modifiers.join(""))
+    IO.printAll(objects)
 
     // Reset terminal styling.
     IO.writeString_(AnsiColors.RESET)
